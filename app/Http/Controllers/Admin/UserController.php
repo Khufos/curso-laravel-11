@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
 class UserController extends Controller
@@ -83,7 +84,7 @@ class UserController extends Controller
     if ($request->password) {
       $data['password'] = bcrypt($request->password);
     }
-    dd($data);
+   
     $user->update($request->only([
       'name',
       'email'

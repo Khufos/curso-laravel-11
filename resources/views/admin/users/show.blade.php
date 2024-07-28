@@ -1,19 +1,25 @@
 @extends('admin.layouts.app')
-@section('title','Detalhes do Usuario');
+
+@section('title', 'Detalhes do Usuário')
 
 @section('content')
+    <h1>Detalhes do Usuário</h1>
+    <ul>
+        <li>Nome: {{ $user->name }}</li>
+        <li>E-mail: {{ $user->email }}</li>
+    </ul>
+    <x-alert/>
 
-    <h1>Detalhes do  Usuario </h1>
+    {{-- @can('owner', $user)
+        pode deletar
+    @endcan --}}
 
-   <ul>
-    <li>Nome: {{ $user->name }}</li>
-    <li>E-mail: {{ $user->email }}</li>
-   </ul>
-   <x-alert/>
-   <form action="{{ route('users.destroy', $user->id)}}" method="post">
-    @csrf
-    @method('delete')
-    <button type="submit">Deletar</button>
-   </form>
 
+    @can('is-admin')
+    <form action="{{ route('users.destroy', $user->id) }}" method="post">
+        @csrf
+        @method('delete')
+        <button type="submit">Deletar</button>
+    </form>
+    @endcan
 @endsection
